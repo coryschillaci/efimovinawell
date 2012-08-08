@@ -1,0 +1,4 @@
+Known typos in Rashid:
+
+Eqn 31 second to last line, (2l_2-2l_2)! ->(2l_2-2\lambda_2)! 
+Eqn 40 missing square root over entire 3rd line (2nd line of RHS)
