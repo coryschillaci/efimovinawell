@@ -10,6 +10,7 @@ bool IsInteger (float x);
 // Tests whether the triad (l1,l2,L) satisfies the triangular inequality |l1-l2|<L<l1+l2
 bool IsTriangular (float l1,float l2,float L);
 
+// THESE FUNCTIONS SHOULD REALLY USE TEMPLATES
 // Return the greater element of the pair (a,b)
 int max(int a, int b);
 float max(float a,float b);

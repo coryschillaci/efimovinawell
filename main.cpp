@@ -3,18 +3,13 @@
 #include <math.h>
 #include "gamma.h"
 #include "coupling.h"
+#include "basis.h"
 
 #define PI 3.14159265358979
 #define ROOT_PI 1.77245385090552
 #define DOUBLE_INFINITY 1.7e308
 
 using namespace std;
-
-unsigned long int uli_fact (int n);
-long int li_fact (int n);
-long double fact (int n); 
-
-//float TMB (int n,int l,int N,int L,int n1,int l1,int n2,int l2,int J,float d);
 
 int main () {
 
@@ -76,6 +71,14 @@ int main () {
 
   // cout<<"< n l, N L, J | n2 l2, n1 l1, J>_d\n";
   // cout<<"< "<<n<<","<<l<<" ; "<<N<<","<<L<<" ; "<<J<<" | "<<n2<<","<<l2<<" ; "<<n1<<","<<l1<<" ; "<<J<<" >="<<TMB(n,l,N,L,n2,l2,n1,l1,J,d)<<"\n\n";
+
+  
+
+  basis NewBasis(2,0);
+
+  NewBasis.printBasis();
+  
+
 
 }
 

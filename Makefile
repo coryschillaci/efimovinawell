@@ -1,8 +1,8 @@
 CC = g++
-CFLAGS = -c -Wall
-LFLAGS = -lm -Wall
+CFLAGS = -c -IBasisClasses/ -Wall
+LFLAGS = -lm -IBasisClasses/ -Wall
 
-OBJECTS = main.o gamma.o coupling.o
+OBJECTS = main.o gamma.o coupling.o basis.o
 
 all: main
 
@@ -18,5 +18,8 @@ gamma.o: gamma.h gamma.cpp
 coupling.o: coupling.h coupling.cpp gamma.h
 	$(CC) $(CFLAGS) coupling.cpp
 
+basis.o: basis.h HOstate.h 
+	$(CC) $(CFLAGS) basis.cpp
+
 clean: 
-	rm *.o main
+	rm *.o BasisClasses/*.o main
