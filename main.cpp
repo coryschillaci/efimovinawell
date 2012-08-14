@@ -74,12 +74,16 @@ int main () {
 
   
 
-  basis NewBasis(2,0);
+  basis NewBasis(50,0);
 
-  NewBasis.printBasis();
+  // NewBasis.printBasis();
+
+  // NewBasis.printSymmetrizer();
+
+  NewBasis.sortStates();
   
-
-
+  NewBasis.printStates();
+  
 }
 
 
