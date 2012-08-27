@@ -40,37 +40,27 @@ void basis::popBasis() {
 	  temp.set_L(nshell-2*(n+N)-l);
 	  
 	  if( temp.IsValid() ) {
+	    fullBasis.push_back( temp );
 	    basisDim_++;
-	    fullBasis.conservativeResize( basisDim_ );
-	    fullBasis(basisDim_-1)=temp;
 	  }
 	    
 	} // end N loop
       } // end l loop
     } // end n loop
   } // end nshell loop
-  if ( basisDim_ != fullBasis.rows() ) cout<<"WARNING: error in size of basis"; 
+  if ( basisDim_ != fullBasis.size() ) cout<<"WARNING: error in size of basis"; 
 }
-
-HOstate basis::getBasisState(unsigned int i) {
-
-  if(i>=basisDim_) cout<<"ERROR in basis::getBasisState! The basis is not that large\n";
-
-  return fullBasis(i);
-
-}
-
 
 void basis::printBasis() {
 
-  int length=fullBasis.rows();
+  int length=fullBasis.size();
   
-  fullBasis(0).printHeader();
+  fullBasis[0].printHeader();
   cout<<"----------------\n";
 
   for(int i=0;i<length;i++) {
 
-    fullBasis(i).printKet();
+    fullBasis[i].printKet();
 
   }
   cout<<"\n";
@@ -93,7 +83,7 @@ void basis::printStates() {
       
       if(states_.col(i)(j)!=0) {
 	cout<<setw(10)<<showpoint<<setprecision(6)<<states_.col(i)(j);
-	fullBasis(j).printKet();	
+	fullBasis[j].printKet();	
       }
 
     } // End j loop
@@ -121,7 +111,7 @@ void basis::sortStates() {
      
     } // end j loop
     
-    energies(i)=fullBasis(tempIndex).energy();
+    energies(i)=fullBasis[tempIndex].energy();
    
   } // End i loop
 
@@ -158,15 +148,15 @@ void basis::popSymmetrizer() {
 
   for(unsigned int i=0;i<basisDim_;i++) {
     
-    prime=fullBasis(i);
+    prime=fullBasis[i];
 
     for(unsigned int j=i;j<basisDim_;j++) {
 
-      unprime=fullBasis(j);
+      unprime=fullBasis[j];
 
       symmetrizer_(i,j) = ( 2.0*TMB( unprime.N() , unprime.L() , unprime.n() , unprime.l() , 
 				      prime.n() , prime.l() , prime.N() , prime.L(), 
-				      prime.J(), 1.0/3.0) ) / 3.0;
+				      prime.J(), 3) ) / 3.0;
       
       if(i==j) symmetrizer_(i,j)+=1.0/3.0; 
       else symmetrizer_(j,i)=symmetrizer_(i,j);
@@ -188,6 +178,11 @@ void basis::calcSymBasis() {
   
   // SHOULD ADD ERROR HANDLING
   //  if (eigensolver.info() != Success) abort();
+
+  // cout<<"\nThe eigenvalues are: \n";
+  // cout<<"--------------------------\n";
+  // cout<<eigensolver.eigenvalues()<<"\n";
+  // cout<<"--------------------------\n";
 
   for(unsigned int i=0;i<basisDim_;i++) {
     if( fabs( eigensolver.eigenvalues()(i)-1 )<=.001 ) {

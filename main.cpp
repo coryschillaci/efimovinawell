@@ -4,6 +4,7 @@
 #include "gamma.h"
 #include "coupling.h"
 #include "basis.h"
+#include "energies.h"
 
 #define PI 3.14159265358979
 #define ROOT_PI 1.77245385090552
@@ -74,15 +75,19 @@ int main () {
 
   
 
-  basis NewBasis(50,0);
+  basis NewBasis(35,0);
 
   // NewBasis.printBasis();
 
   // NewBasis.printSymmetrizer();
 
+  //  cout<<"The number of basis states is "<<NewBasis.basisDim()<<".\n\n";
+
   NewBasis.sortStates();
   
-  NewBasis.printStates();
+  //  NewBasis.printStates();
+
+  energies(NewBasis, -1.0, 1.0);
   
 }
 

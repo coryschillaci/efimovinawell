@@ -46,6 +46,17 @@ void HOstate::IsValidVerbose() {
 }
 
 // These functions set values of private class variables and perform sanity check
+void HOstate::setAll(int new_n, int new_l, int new_N, int new_L, int new_J) {
+  n_=new_n;
+  l_=new_l;
+  N_=new_N;
+  L_=new_L;
+  J_=new_J;
+
+  valid_=checkState();
+
+};
+
 void HOstate::set_n(int new_n) {
   n_=new_n;
   valid_=checkState();
@@ -84,4 +95,13 @@ bool HOstate::checkState() {
 
   else return 1;
 
+}
+
+bool operator== (HOstate &state1, HOstate &state2) {
+
+  return (state1.n_==state2.n_ && state1.l_==state2.l_ && state1.N_==state2.N_ && state1.L_==state2.L_ && state1.J_==state2.J_ );
+ 
+}
+bool operator!= (HOstate &state1, HOstate &state2) {
+  return !(state1==state2);
 }
